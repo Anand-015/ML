@@ -49,3 +49,16 @@ print("Weights:",w)
 print("Bias:",b)
 print("MSE:",mean_squared_error(y_test,y_pred_gd))
 print("R2 Score:",r2_score(y_test,y_pred_gd))
+
+
+X_train_ne =np.c_[np.ones((len(X_train),1)),X_train]
+X_test_ne = np.c_[np.ones((len(X_test),1)),X_test]
+theta = np.linalg.inv(X_train_ne.T @ X_train_ne) @ X_train_ne.T @ y_train
+y_pred_ne = X_test_ne @ theta
+
+print("\n Normal Equation")
+print("------------------")
+print("Intercept :",theta[0])
+print("Slope :",theta[1])
+print("MSE:",mean_squared_error(y_test,y_pred_ne))
+print("R2 score :",r2_score(y_test,y_pred_ne))
