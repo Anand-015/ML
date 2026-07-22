@@ -62,3 +62,28 @@ print("Intercept :",theta[0])
 print("Slope :",theta[1])
 print("MSE:",mean_squared_error(y_test,y_pred_ne))
 print("R2 score :",r2_score(y_test,y_pred_ne))
+
+
+# graph plot 
+x_line = np.linspace(x.min(), x.max(), 100).reshape(-1,1)
+
+# Gradient Descent line
+x_line_scaled = scaler.transform(x_line)
+y_line_gd = w * x_line_scaled.flatten() + b
+
+# Normal Equation line
+y_line_ne = theta[0] + theta[1] * x_line.flatten()
+
+plt.figure(figsize=(8,6))
+
+plt.scatter(x, y, color='gray', alpha=0.4, label='Actual Data')
+plt.plot(x_line, y_line_gd, color='red', linewidth=2, label='Gradient Descent')
+plt.plot(x_line, y_line_ne, color='green', linewidth=2, linestyle='--', label='Normal Equation')
+
+plt.xlabel("Average Rooms")
+plt.ylabel("House Price")
+plt.title("Linear Regression Comparison")
+plt.legend()
+plt.grid(True)
+plt.show()
+
