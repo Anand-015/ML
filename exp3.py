@@ -134,4 +134,23 @@ for container in ax.containers:
 plt.tight_layout()
 plt.show()
 
+plt.figure(figsize=(9,7))
+for name,model,pred in models:
+    y_prob=model.predict_proba(X_test)[:,1]
+    fpr,tpr,thresholds=roc_curve(y_test,y_prob)
+    roc_auc=auc(fpr,tpr)
+    plt.plot(
+    fpr,tpr,
+    label=f"{name}(AUC={roc_auc:.3f})"
+    )
 
+plt.plot([0,1],[0,1],linestyle="--",label="Random Classifier")
+plt.xlim(0,0.15)
+plt.ylim(0.75,1.01)
+plt.xlabel("FPR")
+plt.ylabel("TPR")
+plt.title("ROC CURVE")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
