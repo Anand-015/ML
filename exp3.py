@@ -116,3 +116,22 @@ for name, model, pred in models:
     ]
 
 print(results)
+
+
+ax= results.set_index("Model").plot(kind="bar",figsize=(10,6))
+
+plt.title("Performance Comparison: MLE vs MAP (L1) vs MAP (L2)")
+plt.xlabel("Model")
+plt.ylabel("Score")
+plt.ylim(0.85, 1.02)
+plt.xticks(rotation=0)
+plt.legend(title="Metric")
+plt.grid(axis="y",alpha=0.3)
+
+for container in ax.containers:
+    ax.bar_label(container,fmt="%.3f",padding=2)
+
+plt.tight_layout()
+plt.show()
+
+
