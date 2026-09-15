@@ -46,3 +46,15 @@ for k in k_values:
     "predictions":y_pred
     }
     print(f"{k:<8} | {acc* 100:<9.2f}% | {elapsed_time:<25.2f}")
+
+
+class_names={
+    "T-shirt/top","Trouser","Pullover","Dress","Coat",
+    "sandal","shirt","sneaker","bag","ankle boot"
+}
+best_k=max(results,key=lambda k: results[k]["accuracy"])
+print(f"Best K is : {best_k} with {results[best_k]['accuracy']*100:.2f} %accuracy\n")
+
+print("pers-Class Classification Report :")
+print(classification_report(y_test,results[best_k]["predictions"],target_names=class_names))
+
